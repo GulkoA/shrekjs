@@ -226,7 +226,8 @@ function center(slot, arguments={}) {
     for (const key in arguments) {
         div.setAttribute(key, arguments[key])
     }
-    div.style += 'text-align: center margin: auto width: fit-content'
+    div.style.margin = 'auto'
+    div.style.width = 'fit-content'
     addChild(div, slot)
     return div
 }

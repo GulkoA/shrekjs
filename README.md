@@ -213,8 +213,9 @@ ShrekJS also has a few special elements that are not standard HTML elements but 
 ```js
 center(slot, arguments={})
 ```
-Centers nested elements on the page.
-Creates a div element with `text-align: center margin: auto width: fit-content` style.
+
+Centers nested elements on the page. Does not center the text inside.
+Creates a div element with `margin: auto` and `width: fit-content` in style.
 `slot` and `arguments` work the same as in the basic elements.
 
 ```js
