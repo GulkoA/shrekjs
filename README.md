@@ -149,7 +149,7 @@ shrek.setRoot(id)
 
 ## Basic Elements
 
-ShrekJS comes with a few basic elements built in:
+ShrekJS comes with a few basic elements built-in:
 
 ```js
 div(slot, arguments={})
@@ -190,7 +190,7 @@ Creates an input element with the specified type. If `bindTo` is specified, the 
 labeledInput(labelText, type, arguments={}, bindTo=undefined)
 ```
 
-Creates an input element of a specified type with a preceding label. If `bindTo` is specified, the input value will be bound to the specified binding. `arguments` only apply to the input element. However, if `id` attribute is given, its value will also be applied to the label's `for` atrribute. Otherwise, generated automatically.
+Creates an input element of a specified type with a preceding label. If `bindTo` is specified, the input value will be bound to the specified binding. `arguments` only apply to the input element. However, if `id` attribute is given, its value will also be applied to the label's `for` attribute. Otherwise, generated automatically.
 
 ```js
 button(slot, arguments={}, onclick=()=>{})
@@ -275,7 +275,7 @@ You can directly get and set the value of a binding with keyword `value`.
 myBindable.value
 ```
 
-`value` exposes the value of the binding through a custom property that allows you to interract with it as if it was a normal variable while keeping the binding reactive.
+`value` exposes the value of the binding through a custom property that allows you to interact with it as if it was a normal variable while keeping the binding reactive.
 
 ```js
 myBindable.value = 5
