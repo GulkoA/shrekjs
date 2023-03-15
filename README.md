@@ -105,6 +105,7 @@ However, if you still would like to try it out, you can find the documentation b
         return elements
     }))
 </script>
+```
 
 ## Reusable Component
 
