@@ -17,6 +17,7 @@ However, if you still would like to try it out, you can find the documentation b
     - [Nested Elements](#nested-elements)
     - [Counter](#counter)
     - [Conditional Rendering](#conditional-rendering)
+    - [Updatable](#updatable)
     - [Reusable Component](#reusable-component)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
@@ -84,6 +85,26 @@ However, if you still would like to try it out, you can find the documentation b
     ])
 </script>
 ```
+
+## Updatable
+```html
+<script>
+    list = new Bindable(['a', 'b', 'c'])
+    put(updatable("for loop", () => {
+        elements = []
+        for (let letter of list.value) {
+            elements.push([
+                p(letter),
+                button("Remove", {}, () => {
+                    list.value = list.value.filter(l => l != letter)
+                    update("for loop")
+                    list.print()
+                })
+            ])
+        }
+        return elements
+    }))
+</script>
 
 ## Reusable Component
 
