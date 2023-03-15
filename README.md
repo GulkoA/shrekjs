@@ -118,7 +118,7 @@ ShrekJS is distributed as an npm package but only supported through CDN.
 Add the following line to the \<head> tag of your HTML file:
 
 ```html
-<script src="https://unpkg.com/shrekjs-framework@1.0.0/shrek.js"></script>
+<script src="https://unpkg.com/shrekjs-framework/shrek.js"></script>
 ```
 
 
