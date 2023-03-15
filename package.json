@@ -1,0 +1,25 @@
+{
+  "name": "shrekjs-framework",
+  "version": "1.0.0",
+  "description": "JavaScript framework",
+  "main": "shrek.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GulkoA/shrekjs.git"
+  },
+  "keywords": [
+    "framework",
+    "javascript",
+    "js",
+    "shrek"
+  ],
+  "author": "Alex Gulko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GulkoA/shrekjs/issues"
+  },
+  "homepage": "https://github.com/GulkoA/shrekjs#readme"
+}

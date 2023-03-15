@@ -1,7 +1,7 @@
 const shrek = {
     components: {},
     updatablesFunctions: {},
-    version: '0.1',
+    version: '1.0.0',
     root: undefined,
     rootId: undefined,
     initialized: false
@@ -10,18 +10,16 @@ const shrek = {
 console.info('ShrekJS v' + shrek.version + ' loaded')
 
 class Bindable {
-    constructor(val=undefined) {
-        this.originValue = val
+    constructor(value=undefined) {
+        this.originValue = value
         this.observers = []
 
         Object.defineProperty(this, 'value', {
             get: function() {
-                // console.log('ShrekJS Bindable - value accessed')
                 return this.originValue
             },
             set: function(newValue) {
                 this.originValue = newValue
-                // console.log('ShrekJS Bindable - value changed to ' + newValue)
                 for (const observer of this.observers) {
                     observer(newValue)
                 }
@@ -107,9 +105,24 @@ function div(slot, arguments={}) {
     return div
 }
 
-function text(slot) {
-    return document.createTextNode(slot)
+function span(slot, arguments={}) {
+    const span = document.createElement('span')
+    for (const key in arguments) {
+        span.setAttribute(key, arguments[key])
+    }
+    addChild(span, slot)
+    return span
 }
+
+function p(slot, arguments={}) {
+    const p = document.createElement('p')
+    for (const key in arguments) {
+        p.setAttribute(key, arguments[key])
+    }
+    addChild(p, slot)
+    return p
+}
+
 
 function h(num, slot, arguments={}) {
     const h = document.createElement('h' + num)
@@ -141,58 +154,39 @@ function a(href, slot, inNewTab=false, arguments={}) {
     return a
 }
 
-function p(slot, arguments={}) {
-    const p = document.createElement('p')
-    for (const key in arguments) {
-        p.setAttribute(key, arguments[key])
-    }
-    addChild(p, slot)
-    return p
-}
-
-function center(slot, arguments={}) {
-    const div = document.createElement('div')
-    for (const key in arguments) {
-        div.setAttribute(key, arguments[key])
-    }
-    div.style += 'text-align: center margin: auto width: fit-content'
-    addChild(div, slot)
-    return div
-}
-
-function button(slot, onclick=()=>{}, arguments={}) {
-    const button = document.createElement('button')
-    button.onclick = onclick
+function button(slot, arguments={}, onclick=()=>{}) {
+    const buttonElement = document.createElement('button')
+    buttonElement.onclick = onclick
     for (const key in arguments) {
         if (key === 'onclick') console.error('ShrekJS button() - Please use a function parameter to set the onclick attribute')
-        button.setAttribute(key, arguments[key])
+        buttonElement.setAttribute(key, arguments[key])
     }
-    addChild(button, slot)
-    return button
+    addChild(buttonElement, slot)
+    return buttonElement
 }
 
 button.link = function(slot, href, inNewTab=false, arguments={}) {
-    const button = document.createElement('button')
+    const buttonElement = document.createElement('button')
     if (inNewTab) {
-        button.onclick = () => window.open(href)
+        buttonElement.onclick = () => window.open(href)
     } else {
-        button.onclick = () => window.location.href = href
+        buttonElement.onclick = () => window.location.href = href
     }
 
     for (const key in arguments) {
         if (key === 'onclick') console.error('ShrekJS button.link() - Please use a function parameter to set the onclick attribute')
-        button.setAttribute(key, arguments[key])
+        buttonElement.setAttribute(key, arguments[key])
     }
-    addChild(button, slot)
-    return button
+    addChild(buttonElement, slot)
+    return buttonElement
 }
 
 function input(type, arguments={}, bindTo=undefined) {
-    const input = document.createElement('input')
-    input.setAttribute('type', type)
+    const inputElement = document.createElement('input')
+    inputElement.setAttribute('type', type)
 
     for (const key in arguments) {
-        input.setAttribute(key, arguments[key])
+        inputElement.setAttribute(key, arguments[key])
     }
     
     if (bindTo !== undefined) {
@@ -201,17 +195,17 @@ function input(type, arguments={}, bindTo=undefined) {
         }
 
         if (type === 'checkbox' || type === 'radio') {
-            input.checked = bindTo.value
-            input.onchange = () => bindTo.value = input.checked
-            bindTo.subscribe((newValue) => input.checked = newValue)
+            inputElement.checked = bindTo.value
+            inputElement.onchange = () => bindTo.value = inputElement.checked
+            bindTo.subscribe((newValue) => inputElement.checked = newValue)
         } else {
-            input.value = bindTo.value !== undefined ? bindTo.value : ''
-            input.oninput = () => bindTo.value = input.value
-            bindTo.subscribe((newValue) => input.value = newValue)
+            inputElement.value = bindTo.value !== undefined ? bindTo.value : ''
+            inputElement.oninput = () => bindTo.value = inputElement.value
+            bindTo.subscribe((newValue) => inputElement.value = newValue)
         }
     }
 
-    return input
+    return inputElement
 }
 
 function labeledInput(labelText, type, arguments={}, bindTo=undefined) {
@@ -227,13 +221,14 @@ function labeledInput(labelText, type, arguments={}, bindTo=undefined) {
     return [label, inputElement]
 }
 
-function span(slot, arguments={}) {
-    const span = document.createElement('span')
+function center(slot, arguments={}) {
+    const div = document.createElement('div')
     for (const key in arguments) {
-        span.setAttribute(key, arguments[key])
+        div.setAttribute(key, arguments[key])
     }
-    addChild(span, slot)
-    return span
+    div.style += 'text-align: center margin: auto width: fit-content'
+    addChild(div, slot)
+    return div
 }
 
 function tag(name, slot, arguments={}) {
@@ -257,18 +252,8 @@ function showIf(bindableCondition, slot) {
     return div
 }
 
-function update(name=undefined, arguments={}) {
-    if (name === undefined) {
-        for (const key in shrek.updatables) {
-            shrek.updatables[key]()
-        }
-    } else {
-        if (shrek.updatablesFunctions[name]) {
-            shrek.updatablesFunctions[name](arguments)
-        } else {
-            console.error('ShrekJS update() - Updatable "' + name + '" not found')
-        }
-    }
+function shrekPic() {
+    return img('https://letsdraw.it/drawing/jn3dr1ip5.png')
 }
 
 function updatable(name, slotFunction, initialArguments={}) {
@@ -282,8 +267,19 @@ function updatable(name, slotFunction, initialArguments={}) {
     return div
 }
 
-function shrekPic() {
-    return img('https://letsdraw.it/drawing/jn3dr1ip5.png')
+
+function update(name=undefined, arguments={}) {
+    if (name === undefined) {
+        for (const key in shrek.updatables) {
+            shrek.updatables[key]()
+        }
+    } else {
+        if (shrek.updatablesFunctions[name]) {
+            shrek.updatablesFunctions[name](arguments)
+        } else {
+            console.error('ShrekJS update() - Updatable "' + name + '" not found')
+        }
+    }
 }
 
 function makeComponent(name, componentFunction) {
