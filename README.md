@@ -1,4 +1,4 @@
-# ShrekJS - a bad JS framework
+# ShrekJS
 
 ShrekJS is a JavaScript framework for building front-end applications. It was created as a joke but was accidentally made into an actually usable framework. It features reactive bindings, updatable sections, conditional rendering, and others.
 
