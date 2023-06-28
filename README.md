@@ -2,23 +2,23 @@
 
 ShrekJS is a JavaScript framework for building front-end applications. It was created as a joke but was accidentally made into an actually usable framework. It features reactive bindings, updatable sections, conditional rendering, and others.
 
-# Disclaimer
+## Disclaimer
 
-This framework is a joke. It is not meant to be used in production. It is not meant to be used at all. If you are using this framework for production, there is something wrong with you. Better use Vue.js or React.
+This framework is merely a joke and an exercise. It is not meant to be used in production. It is not meant to be used at all. If you are using this framework for production, there is something wrong with you. Better use Vue or React.
 
 This framework will make you use a whole lot of function nesting, which is bad for the environment. It teaches some bad practices, such as using CDN for everything, writing large inline scripts, and using global variables.
 
 However, if you still would like to try it out, you can find the documentation below.
 
-# Table of Contents
+## Table of Contents
 
 - [Examples](#examples)
-    - [Hello World](#hello-world)
-    - [Nested Elements](#nested-elements)
-    - [Counter](#counter)
-    - [Conditional Rendering](#conditional-rendering)
-    - [Updatable](#updatable)
-    - [Reusable Component](#reusable-component)
+  - [Hello World](#hello-world)
+  - [Nested Elements](#nested-elements)
+  - [Counter](#counter)
+  - [Conditional Rendering](#conditional-rendering)
+  - [Updatable](#updatable)
+  - [Reusable Component](#reusable-component)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Elements](#elements)
@@ -30,21 +30,23 @@ However, if you still would like to try it out, you can find the documentation b
   - [Reading-Writing Bindables](#reading-writing-bindables)
   - [Adding Observers](#adding-observers)
 - [Components](#components)
-    - [Creating Components](#creating-components)
-    - [Using Components](#using-components)
+  - [Creating Components](#creating-components)
+  - [Using Components](#using-components)
 
-# Examples
+## Examples
 
 > All example assume that ShrekJS is installed through CDN.
 
-## Hello World
+### Hello World
+
 ```html
 <script>
     put("Hello World!")
 </script>
 ```
 
-## Nested Elements
+### Nested Elements
+
 ```html
 <script>
     put(div([
@@ -59,7 +61,8 @@ However, if you still would like to try it out, you can find the documentation b
 </script>
 ```
 
-## Counter
+### Counter
+
 ```html
 <script>
     let count = new Bindable(0)
@@ -72,7 +75,8 @@ However, if you still would like to try it out, you can find the documentation b
 </script>
 ```
 
-## Conditional Rendering
+### Conditional Rendering
+
 ```html
 <script>
     let show = new Bindable(true)
@@ -86,7 +90,8 @@ However, if you still would like to try it out, you can find the documentation b
 </script>
 ```
 
-## Updatable
+### Updatable
+
 ```html
 <script>
     list = new Bindable(['a', 'b', 'c'])
@@ -107,7 +112,7 @@ However, if you still would like to try it out, you can find the documentation b
 </script>
 ```
 
-## Reusable Component
+### Reusable Component
 
 ```js
 // component.sh.js
@@ -131,7 +136,7 @@ makeComponent("myComponent", (args) => {
 </script>
 ```
 
-# Installation
+## Installation
 
 ShrekJS is distributed as an npm package but only supported through CDN.
 
@@ -143,14 +148,13 @@ Add the following line to the \<head> tag of your HTML file:
 <script src="https://unpkg.com/shrekjs-framework/shrek.js"></script>
 ```
 
-
-# Getting Started
+## Getting Started
 
 ShrekJS library consists of three parts: [elements](#elements), [bindings](#bindings), and [components](#components). Elements are the basic building blocks of ShrekJS. They are the HTML elements that are rendered on the page. Bindings are the reactive data that is used to update the elements. Components are reusable pieces of code that can be used to create more complex elements.
 
 If you install the library through CDN, you can start writing ShrekJS code right away in an inline \<script> tag or in a separate .js file.
 
-# Elements
+## Elements
 
 Every element in ShrekJS is a function that returns an HTML element.
 
@@ -159,6 +163,7 @@ You can put any element on the page by calling the following function:
 ```js
 put(slot)
 ```
+
 `slot` - The content to be added to the root. Can be anything that will be a child of the root. For example, another element, a string, or a binding. If you would like to display multiple elements, you can pass an array of children of any type.
 
 The default root element is the body element. You can change it with the following function:
@@ -169,9 +174,9 @@ shrek.setRoot(id)
 
 `id` - The id of the element to be used as the root. Must be a string.
 
-## Basic Elements
+### Basic Elements
 
-ShrekJS comes with a few basic elements built-in:
+ShrekJS comes with a few basic elements built in:
 
 ```js
 div(slot, arguments={})
@@ -198,7 +203,7 @@ Parameters:
 
 `inNewTab` - Whether the link should open in a new tab. Must be a boolean. Defaults to false.
 
-## Input Elements
+### Input Elements
 
 You can also create inputs with included functions
 
@@ -228,7 +233,7 @@ button.link(slot, href, inNewTab=false, arguments={})
 Creates a button element with an onclick function that redirects to the specified link.
 `inNewTab`, `arguments`, and `slot` work the same as in the basic elements.
 
-## Special Elements
+### Special Elements
 
 ShrekJS also has a few special elements that are not standard HTML elements but are still useful.
 
@@ -267,7 +272,9 @@ If `name` is specified, the updatable block with the specified name will be upda
 shrekPic()
 ```
 
-## Custom Elements
+Shrek.
+
+### Custom Elements
 
 If you would like to create an html element that is not included in ShrekJS, you can do so with the following function:
 
@@ -278,7 +285,7 @@ tag(name, slot, arguments={})
 Creates an element with the specified tag name.
 `slot` and `arguments` work the same as in the basic elements.
 
-# Bindings
+## Bindings
 
 Bindings are the reactive data connections that are used to update the elements on variable change and vice versa.
 In ShrekJS they are saved as a data type `Bindable`.
@@ -290,7 +297,7 @@ let myBindable = new Bindable(value=undefined)
 
 `value` is the initial value of the binding and is optional. It can be of any type and defaults to undefined.
 
-## Reading-Writing Bindables
+### Reading-Writing Bindables
 
 You can directly get and set the value of a binding with keyword `value`.
 
@@ -311,7 +318,7 @@ For example, if you set a slot of some element to `myBindable`, the element will
 The same goes for the other way around.
 If you set an input's `bindTo` to `myBindable`, the value of `myBindable` will be updated when the input's value changes.
 
-## Adding Observers
+### Adding Observers
 
 When you pass a Bindable to an element, the element generates an observer function that is saved into an observers list and is called when the value changes.
 You can also add your own custom observers to a Bindable to add custom behavior when the value changes.
@@ -329,11 +336,11 @@ To print the value of a binding, you can use the following method:
 myBindable.print()
 ```
 
-# Components
+## Components
 
 Components are reusable pieces of code that can be used to create more complex elements on your webpage.
 
-## Creating Components
+### Creating Components
 
 Components are created with the following function:
 
@@ -346,7 +353,7 @@ makeComponent(name, componentFunction)
 
 > It is highly recommended to create each component in its own .sh.js file and load it as a script to the main html file.
 
-## Using Components
+### Using Components
 
 Components are used with the following function:
 

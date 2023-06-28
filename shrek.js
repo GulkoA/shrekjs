@@ -1,7 +1,7 @@
 const shrek = {
     components: {},
     updatablesFunctions: {},
-    version: '1.0.0',
+    version: '1.0.6',
     root: undefined,
     rootId: undefined,
     initialized: false
