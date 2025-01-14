@@ -1,10 +1,10 @@
 # ShrekJS
 
-ShrekJS is a JavaScript framework for building front-end applications. It was created as a joke but was accidentally made into an actually usable framework. It features reactive bindings, updatable sections, conditional rendering, and others.
+ShrekJS is a JavaScript framework for building front-end applications. It features reactive bindings, updatable sections, conditional rendering, and others.
 
 ## Disclaimer
 
-This framework is merely a joke and an exercise. It is not meant to be used in production. It is not meant to be used at all. If you are using this framework for production, there is something wrong with you. Better use Vue or React.
+This framework is merely a joke and an exercise. It is not meant to be used in production. It is not meant to be used at all. If you are using this framework for production, there is something wrong with you. Better use Vue, React or Svelte.
 
 This framework will make you use a whole lot of function nesting, which is bad for the environment. It teaches some bad practices, such as using CDN for everything, writing large inline scripts, and using global variables.
 
